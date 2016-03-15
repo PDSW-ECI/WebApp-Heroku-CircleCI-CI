@@ -1,12 +1,18 @@
 ##Integración contínua con CircleCI y Heroku
 
-[Documentación CircleCI para Heroku:]
-(https://circleci.com/docs/continuous-deployment-with-heroku)
+[Documentación CircleCI para Heroku:](https://circleci.com/docs/continuous-deployment-with-heroku)
 
-A partir de uno de los ejercicios anteriormente desarrollados, va a construir un esquema de despliegue contínuo para el mismo. 
+###Parte I.
 
+1. Retome el proyecto Web desarrollado en el laboratorio antepasado (la herramientade registro de consultas a pacientes), e integre en el mismo el esquema de DAOs del laboratorio pasado. Recuerde que además de los fuentes, debe incorporar las dependencias y demás 'plugins' que se estén usando en el POM.xml de este último.
 
-1. Cree una organización en GitHUB para su grupo de trabajo, y en la misma cree un repositorio para el presente ejercicio.
+2. Haga una nueva implementación de la interfaz "ServiciosPacientes", pero que a diferencia de la disponible actualmente (ServiciosPacientesStub), maneje un esquema de persistencia real, a través del esquema de DAOs implementado.
+
+3. Actualice los cambios realizados en su repositorio de GitHUB.
+
+###Parte II.
+
+1. Cree (si no la tiene aún) una cuenta en el proveedor PAAS Heroku ([www.heroku.com](www.heroku.com)). Acceda a su cuenta y cree una nueva aplicación
 
 1. Después de crear su cuenta en Heroku y la respectiva aplicación, deben generar una llave de API (opción Manage Account/API Key).
 2. Deben ‘conectar’ la aplicación en GitHUB a CircleCI
@@ -47,8 +53,8 @@ también deben terminar en la palabra ‘Test’, por ejemplo:
 		```
 	@Test
 public void registroDePacientesTest(){
-...
- }
-```
+	...
+ 	}
+	```
 
-6. Haga commit y push, y verifique que el proceso no haya sido exitoso dada la prueba fallida.
+8. Haga commit y push, y verifique que el proceso no haya sido exitoso dada la prueba fallida.

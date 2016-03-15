@@ -12,13 +12,44 @@
 
 ###Parte II.
 
-1. Cree (si no la tiene aún) una cuenta en el proveedor PAAS Heroku ([www.heroku.com](www.heroku.com)). Acceda a su cuenta y cree una nueva aplicación
+1. Cree (si no la tiene aún) una cuenta en el proveedor PAAS Heroku ([www.heroku.com](www.heroku.com)).
+2. Acceda a su cuenta en Heroku y cree una nueva aplicación:
 
-1. Después de crear su cuenta en Heroku y la respectiva aplicación, deben generar una llave de API (opción Manage Account/API Key).
-2. Deben ‘conectar’ la aplicación en GitHUB a CircleCI
-3. En CircleCI, en las opciones de ‘Project Settings’/Continous
-Deployment/Heroku Deployment’, registren la llave de Heroku
-4. Si todo queda correctamente configurado, cada vez que hagan un PUSH al repositorio, CircleCI ejecutará la fase de construcción del proyecto. Para que cuando las pruebas pasen automáticamente se despliegue en Heroku, deben definir en el archivo circle.yml (ubicado en la raíz del proyecto):
+	![](img/HerokuCreateApp.png)
+
+3. Después de crear su cuenta en Heroku y la respectiva aplicación, genere una llave de API: Opción Manage Account:
+
+	![](img/ManageAccount.png)
+	
+	Opción API Key:
+	![](img/GenerateKey.png)
+
+4. Ingrese a la plataforma de integración contínua Circle.CI ([www.circleci.com](www.circleci.com)). Para ingresar, basta que se autentique con su usuario de GitHUB.
+
+5. Ingrese a las opciones generales de su cuenta y registre la llave de Heroku. Con esto, CircleCI tendrá privilegios para hacer despliegue automático.
+
+	![](img/AccountSettings.png)
+	![](img/AddKey.png)
+
+6. Conecte su aplicación (la desarrollada en la parte I) con el ambiente de integración contínua. Abra la opción de 'agregar proyecto':
+
+	![](img/ConnectProject.png)
+	
+	Seleccione el proyecto de la parte I, y seleccione 'build project'.
+	
+	![](img/AddProjects.png)
+
+	
+7. En CircleCI, seleccione el proyecto recién agregado, abra su menú de opciones y seleccione las opciones de despliegue de Heroku:
+
+	![](img/ProjectSettings.png)
+	![](img/HerokuDeployment.png)
+
+	Verifique que ya esté registrada la llave del API. Luego, asocie el 'usuario de despliegue' (Step 2):
+
+	![](img/SetDeployUser.png)
+
+8. Si todo queda correctamente configurado, cada vez que hagan un PUSH al repositorio, CircleCI ejecutará la fase de construcción del proyecto. Para que cuando las pruebas pasen automáticamente se despliegue en Heroku, deben definir en el archivo circle.yml (ubicado en la raíz del proyecto):
 	* La rama del repositorio de GitHUB que se desplegará en Heroku. o El nombre de la aplicación de Heroku en la que se hará el
 despliegue.
 	* La ejecución de la fase ‘site’ de Maven, para generar la
@@ -27,7 +58,7 @@ documentación de pruebas, cubrimiento de pruebas y análisis estático (cuando 
 	Ejemplo:
 	[https://github.com/PDSW-ECI/base-proyectos/blob/master/circle.yml](https://github.com/PDSW-ECI/base-proyectos/blob/master/circle.yml)
 
-5. Heroku requiere los siguientes archivos de configuración (con sus respectivos contenidos), de manera que sea qué versión de Java utilizar, y cómo iniciar la aplicación, respectivamente:
+9. Heroku requiere los siguientes archivos de configuración (con sus respectivos contenidos) en el directorio raíz del proyecto, de manera que sea qué versión de Java utilizar, y cómo iniciar la aplicación, respectivamente:
 
 	system.properties
 
@@ -41,20 +72,8 @@ java.runtime.version=1.8
 web: java -Dserver.port=$PORT -jar target/*.jar
 ```
 
-6. Haga commit y push de su repositorio local a GitHub. Abra la consola de CircleCI y verifique que el de descarga, compilación, y despliegue.
+10. El ambiente de despliegue contínuo requiere también un archivo de configuración 'circle.yml' en la raíz del proyecto, en el cual se indica (entre otras cosas) en qué aplicación de Heroku se debe desplegar la aplicación que está en GitHUB. Puede basarse en el siguiente archivo, teniendo en cuenta que se debe ajustar el parámetro 'appname': [https://github.com/PDSW-ECI/base-proyectos/blob/master/circle.yml](https://github.com/PDSW-ECI/base-proyectos/blob/master/circle.yml)
 
-7. Para probar la fase de pruebas (aún no implementada), implemente un caso de prueba que siempre falle, teniendo en cuenta las siguientes convenciones:
 
-	* Las pruebas deben estar en la ruta estándar de Maven: src/test/java
-	* El nombre de la clase que tiene las pruebas debe terminar en ‘Test’. Por ejemplo, ModuloXXTest.java . Si usan, por ejemplo, el nombre ModuloXXTests.java, la prueba es omitida (esto es un comportamiento poco deseable de Maven, que se da para tener compatibilidad hacia atrás con versiones antiguas de JUnit!!).
-	* Los nombres de los métodos en los que se corran las pruebas
-también deben terminar en la palabra ‘Test’, por ejemplo:
+6. Haga commit y push de su repositorio local a GitHub. Abra la consola de CircleCI y verifique que el de descarga, compilación, y despliegue. Igualmente, verifique que la aplicación haya sido desplegada en Heroku.
 
-		```
-	@Test
-public void registroDePacientesTest(){
-	...
- 	}
-	```
-
-8. Haga commit y push, y verifique que el proceso no haya sido exitoso dada la prueba fallida.

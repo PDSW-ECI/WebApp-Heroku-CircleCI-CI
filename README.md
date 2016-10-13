@@ -4,9 +4,9 @@
 
 ###Parte I.
 
-1. Retome el proyecto Web desarrollado en el laboratorio antepasado (la herramientade registro de consultas a pacientes), e integre en el mismo el esquema de DAOs del laboratorio pasado. Recuerde que además de los fuentes, debe incorporar las dependencias y demás 'plugins' que se estén usando en el POM.xml de este último.
+1. Retome el proyecto Web desarrollado en el laboratorio antepasado (la herramientade de manejo de foros), e integre en el mismo el esquema de DAOs del laboratorio pasado. Recuerde que además de los fuentes, debe incorporar las dependencias y demás 'plugins' que se estén usando en el POM.xml de este último.
 
-2. Haga una nueva clase que implemente la interfaz "ServiciosPacientes", pero que a diferencia de la disponible actualmente (ServiciosPacientesStub), maneje un esquema de persistencia real, a través del esquema de DAOs implementado.
+2. Haga una nueva clase que implemente la interfaz "ServiciosForo", pero que a diferencia de la disponible actualmente (ServiciosPacientesStub), maneje un esquema de persistencia real, a través del esquema de DAOs implementado.
 
 3. Actualice los cambios realizados en su repositorio de GitHUB.
 
@@ -25,31 +25,21 @@
 	![](img/GenerateKey.png)
 
 4. Ingrese a la plataforma de integración contínua Circle.CI ([www.circleci.com](www.circleci.com)). Para ingresar, basta que se autentique con su usuario de GitHUB.
+5. Seleccione la opción de agregar proyectos. En la organización o usuario de GitHub, seleccione el proyecto al que le va hacer despliegue continuo, y haga clic en "Build Project":
 
-5. Ingrese a las opciones generales de su cuenta y registre la llave de Heroku. Con esto, CircleCI tendrá privilegios para hacer despliegue automático.
+	![](img/AppBuild.png) 
 
-	![](img/AccountSettings.png)
-	![](img/AddKey.png)
+	Una vez se inicie la primera construcción del proyecto, seleccione las opciones del proyecto (project settings)
 
-6. Conecte su aplicación (la desarrollada en la parte I) con el ambiente de integración contínua. Abra la opción de 'agregar proyecto':
+	![](img/ProjectSettings2.png):
 
-	![](img/ConnectProject.png)
-	
-	Seleccione el proyecto de la parte I, y seleccione 'build project'.
-	
-	![](img/AddProjects.png)
-
-	
-7. En CircleCI, seleccione el proyecto recién agregado, abra su menú de opciones y seleccione las opciones de despliegue de Heroku:
-
-	![](img/ProjectSettings.png)
-	![](img/HerokuDeployment.png)
-
-	Verifique que ya esté registrada la llave del API. Luego, asocie el 'usuario de despliegue' (Step 2):
+	Vaya a CONTINUOUS DEPLOYMENT/Heroku Deployment, y realice los dos pasos indicados: (1) registrar la llave de Heroku, y (2) asociar su usuario para el despliegue:
 
 	![](img/SetDeployUser.png)
 
-8. Si todo queda correctamente configurado, cada vez que hagan un PUSH al repositorio, CircleCI ejecutará la fase de construcción del proyecto. Para que cuando las pruebas pasen automáticamente se despliegue en Heroku, deben definir en el archivo circle.yml (ubicado en la raíz del proyecto):
+
+
+8. Si todo queda correctamente configurado, cada vez que hagan un PUSH al repositorio, CircleCI ejecutará la fase de construcción del proyecto. Para que cuando las pruebas pasen automáticamente se despliegue en Heroku, debe definir en el archivo circle.yml (ubicado en la raíz del proyecto):
 	* La rama del repositorio de GitHUB que se desplegará en Heroku. o El nombre de la aplicación de Heroku en la que se hará el
 despliegue.
 	* La ejecución de la fase ‘site’ de Maven, para generar la

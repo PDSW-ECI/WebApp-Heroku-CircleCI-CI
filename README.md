@@ -54,6 +54,42 @@ documentación de pruebas, cubrimiento de pruebas y análisis estático (cuando 
 	```xml
 	<!-- Plugin configuration for Heroku compatibility. -->            <plugin>                <groupId>org.apache.maven.plugins</groupId>                <artifactId>maven-dependency-plugin</artifactId>                <version>2.1</version>                <executions>                    <execution>                        <phase>package</phase>                        <goals>                            <goal>copy</goal>                        </goals>                        <configuration>                            <artifactItems>                                <artifactItem>                                    <groupId>com.github.jsimone</groupId>                                    <artifactId>webapp-runner</artifactId>                                    <version>8.0.30.2</version>                                    <destFileName>webapp-runner.jar</destFileName>                                </artifactItem>                            </artifactItems>                        </configuration>                    </execution>                </executions>            </plugin> 	```           
 	
+	Y la siguiente configuración para la generación de reportes:
+	
+	```xml	
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.18.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+            </plugin>            
+        </plugins>
+    </reporting>
+ 	```	
+	
+	
 	Nota: Si en el pom.xml ya hay otro plugin con el mismo <groupId> y <artifactId>, reemplácelo por el anteriormente mostrado.
 
 10. Heroku requiere los siguientes archivos de configuración (con sus respectivos contenidos) en el directorio raíz del proyecto, de manera que sea qué versión de Java utilizar, y cómo iniciar la aplicación, respectivamente:
@@ -74,4 +110,9 @@ web:    java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT ta
 
 
 6. Haga commit y push de su repositorio local a GitHub. Abra la consola de CircleCI y verifique que el de descarga, compilación, y despliegue. Igualmente, verifique que la aplicación haya sido desplegada en Heroku.
+
+11.Revise los reportes generados tras el despliegue, en la sección "Artifacts":
+
+
+![](img/artifacts.png)
 

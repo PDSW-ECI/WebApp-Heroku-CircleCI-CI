@@ -125,7 +125,7 @@ documentación de pruebas, cubrimiento de pruebas y análisis estático (cuando 
 	Procfile 
 
 	```
-	web:    java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
+	web:    java $JAVA_OPTS -jar target/endorsed/webapp-runner.jar --port $PORT target/*.war
 	```
 
 10. El ambiente de despliegue contínuo requiere también un archivo de configuración 'circle.yml' en la raíz del proyecto, en el cual se indica (entre otras cosas) en qué aplicación de Heroku se debe desplegar la aplicación que está en GitHUB. Puede basarse en el siguiente archivo, teniendo en cuenta que se debe ajustar el parámetro 'appname': [https://github.com/PDSW-ECI/base-proyectos/blob/master/circle.yml](https://github.com/PDSW-ECI/base-proyectos/blob/master/circle.yml)

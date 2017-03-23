@@ -4,11 +4,7 @@
 
 ### Parte I.
 
-1. Retome el proyecto Web desarrollado en el laboratorio antepasado (la herramientade de manejo de foros), e integre en el mismo el esquema de DAOs del laboratorio pasado. Recuerde que además de los fuentes, debe incorporar las dependencias y demás 'plugins' que se estén usando en el POM.xml de este último.
-
-2. Haga una nueva clase que implemente la interfaz "ServiciosForo", pero que a diferencia de la disponible actualmente (ServiciosPacientesStub), maneje un esquema de persistencia real, a través del esquema de DAOs implementado.
-
-3. Actualice los cambios realizados en su repositorio de GitHUB.
+1. Integre las capas lógicas (lab 6) y de presentación (lab5) - ver enunciado anterior-
 
 ### Parte II.
 

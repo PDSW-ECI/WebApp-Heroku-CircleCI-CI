@@ -44,7 +44,7 @@ documentación de pruebas, cubrimiento de pruebas y análisis estático (cuando 
 	[https://github.com/PDSW-ECI/base-proyectos/blob/master/circle.yml](https://github.com/PDSW-ECI/base-proyectos/blob/master/circle.yml)
 
 
-9. Rectifique que en el pom.xml, en la fase de construcción, se tenga el siguiente plugin (es decir, dentro de <build><plugins>):
+9. Rectifique que en el pom.xml, en la fase de construcción, se tenga el siguiente plugin (es decir, dentro de \<build>\<plugins>):
 
 	```xml
 	<!-- Plugin configuration for Heroku compatibility. -->

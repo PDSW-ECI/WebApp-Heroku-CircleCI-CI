@@ -1,6 +1,6 @@
 ## Integración contínua con CircleCI y Heroku
 
-[Documentación CircleCI para Heroku:](https://circleci.com/docs/continuous-deployment-with-heroku)
+[Documentación CircleCI para Heroku:](https://circleci.com/integrations/heroku/)
 
 
 Para este ejercicio haga uso de la versión funcional de su aplicación: la rama 'master' con la aplicación basada en un 'mock' de la lógica, o la versión completa (en caso de que ya la tenga) ya mezclada en la rama 'master'.
